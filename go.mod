@@ -1,3 +1,3 @@
-module github.com/infraql/go-sqlite3
+module github.com/stackql/go-sqlite3
 
 go 1.12
