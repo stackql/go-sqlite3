@@ -24,6 +24,8 @@
  * 4. This notice must not be removed or altered.
  */
 
+#ifndef SQLEAN_REGEXP_INCLUDED
+#define SQLEAN_REGEXP_INCLUDED 1
 /*
  * Definitions etc. for regexp(3) routines.
  *
@@ -45,3 +47,5 @@ regexp* re_compile(const char* re);
 int re_execute(regexp* rp, const char* s);
 int re_substitute(const regexp* rp, const char* src, char* dst);
 void re_error(char* message);
+
+#endif
