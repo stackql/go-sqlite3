@@ -22,6 +22,11 @@
  * 	the original software.
  *
  * 4. This notice must not be removed or altered.
+ * 
+ * Addendum: The code supplied has been modified for the
+ * particular needs of this software.  This addendum consitutes
+ * official notice of same, as required by point 3 above.
+ * 
  */
 
 #ifndef SQLEAN_REGEXP_INCLUDED
