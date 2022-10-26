@@ -9,5 +9,6 @@ package sqlite3
 
 /*
 #cgo CFLAGS: -DSQLITE_ENABLE_SQLEANALL -DSQLITE_ENABLE_UNICODE
+#cgo LDFLAGS: -lm
 */
 import "C"
