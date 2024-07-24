@@ -234713,7 +234713,7 @@ int sqlite3_user_delete(
 #include <math.h>
 
 #include "sqlite3ext.h"
-SQLITE_EXTENSION_INIT1;
+SQLITE_EXTENSION_INIT1
 
 #if defined(HAVE_STDINT_H) /* Use this case if we have ANSI headers */
 #define SQLITE_INT_TO_PTR(X) ((void*)(intptr_t)(X))
