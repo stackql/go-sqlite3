@@ -191099,6 +191099,74 @@ static sqlite3_module jsonTreeModule = {
 ** functions and the virtual table implemented by this file.
 ****************************************************************************/
 
+/* BEGIN custom function json_equal */
+
+/*
+** Function to compare two JSON objects for equality regardless of key order.
+*/
+static void jsonEqualFunc(
+  sqlite3_context *ctx,
+  int argc,
+  sqlite3_value **argv
+){
+  if (argc != 2) {
+    sqlite3_result_error(ctx, "json_equal() requires exactly 2 arguments", -1);
+    return;
+  }
+
+  const char *zJson1 = (const char*)sqlite3_value_text(argv[0]);
+  const char *zJson2 = (const char*)sqlite3_value_text(argv[1]);
+
+  if (zJson1 == NULL || zJson2 == NULL) {
+    sqlite3_result_error(ctx, "NULL input for JSON comparison", -1);
+    return;
+  }
+
+  JsonParse parse1, parse2;
+  if (jsonParse(&parse1, ctx, zJson1) || jsonParse(&parse2, ctx, zJson2)) {
+    jsonParseReset(&parse1);
+    jsonParseReset(&parse2);
+    return;
+  }
+
+  // Function to compare two JsonNode objects for equality
+  int jsonNodesEqual(JsonNode *pNode1, JsonNode *pNode2) {
+    if (pNode1->eType != pNode2->eType) return 0;
+    if (pNode1->eType == JSON_OBJECT) {
+      if (pNode1->n != pNode2->n) return 0;
+      for (int i = 1; i <= pNode1->n; i += 2) {
+        int found = 0;
+        for (int j = 1; j <= pNode2->n; j += 2) {
+          if (jsonLabelCompare(&pNode1[i], pNode2[j].u.zJContent, pNode2[j].n - 2) &&
+              jsonNodesEqual(&pNode1[i + 1], &pNode2[j + 1])) {
+            found = 1;
+            break;
+          }
+        }
+        if (!found) return 0;
+      }
+      return 1;
+    }
+    if (pNode1->eType == JSON_ARRAY) {
+      if (pNode1->n != pNode2->n) return 0;
+      for (int i = 1; i <= pNode1->n; i++) {
+        if (!jsonNodesEqual(&pNode1[i], &pNode2[i])) return 0;
+      }
+      return 1;
+    }
+    // Simple type comparison
+    return pNode1->n == pNode2->n && memcmp(pNode1->u.zJContent, pNode2->u.zJContent, pNode1->n) == 0;
+  }
+
+  int result = jsonNodesEqual(parse1.aNode, parse2.aNode);
+  jsonParseReset(&parse1);
+  jsonParseReset(&parse2);
+
+  sqlite3_result_int(ctx, result);
+}
+
+/* END custom function json_equal */
+
 SQLITE_PRIVATE int sqlite3Json1Init(sqlite3 *db){
   int rc = SQLITE_OK;
   unsigned int i;
@@ -191123,6 +191191,7 @@ SQLITE_PRIVATE int sqlite3Json1Init(sqlite3 *db){
     { "json_type",            1, 0,   jsonTypeFunc          },
     { "json_type",            2, 0,   jsonTypeFunc          },
     { "json_valid",           1, 0,   jsonValidFunc         },
+    { "json_equal",           2, 0,   jsonEqualFunc         },
 
 #if SQLITE_DEBUG
     /* DEBUG and TESTING functions */
