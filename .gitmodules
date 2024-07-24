@@ -1,0 +1,3 @@
+[submodule "ext/json-functions"]
+	path = ext/json-functions
+	url = https://github.com/stackql/sqlite-ext-json-functions.git
