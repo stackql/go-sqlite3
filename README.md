@@ -585,6 +585,25 @@ The -binding suffix was added to avoid build failures under gccgo.
 
 In this repository, those files are an amalgamation of code that was copied from SQLite3. The license of that code is the same as the license of SQLite3.
 
+# Pull custom C extension functions in
+
+```bash
+git submodule add https://github.com/stackql/sqlite-ext-json-functions.git ext/json-functions
+git submodule update --init --recursive
+cd ext/json-functions
+git pull origin main
+cd ../..
+```
+
+``bash
+git add .
+git commit -m "updated functions"
+git push origin feature/custom-functions
+git tag v0.0.9-stackqlalpha01
+git push origin v0.0.9-stackqlalpha01
+```
+
+
 # Author
 
 Yasuhiro Matsumoto (a.k.a mattn)
