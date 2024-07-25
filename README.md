@@ -599,8 +599,8 @@ cd ../..
 git add .
 git commit -m "updated functions"
 git push origin feature/custom-functions
-git tag v0.0.9-stackqlalpha01
-git push origin v0.0.9-stackqlalpha01
+git tag v0.0.11-stackqlalpha01
+git push origin v0.0.11-stackqlalpha01
 ```
 
 
