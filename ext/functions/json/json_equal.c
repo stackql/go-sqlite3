@@ -1,7 +1,7 @@
 #include <sqlite3ext.h>
 SQLITE_EXTENSION_INIT1
 
-#include <cjson/cJSON.h>
+#include "cJSON.h"
 #include <string.h>
 
 // Helper function to compare JSON strings
