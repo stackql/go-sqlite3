@@ -31,8 +31,8 @@ package sqlite3
 #endif
 #include <stdlib.h>
 #include <string.h>
-
 #include "ext/functions/json/cJSON.h"
+#include "ext/functions/json/cJSON.c"
 #include "ext/functions/included_functions.h"
 */
 

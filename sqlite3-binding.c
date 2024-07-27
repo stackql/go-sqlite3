@@ -164098,12 +164098,6 @@ SQLITE_PRIVATE int sqlite3Json1Init(sqlite3*);
 #ifdef SQLITE_ENABLE_STMTVTAB
 SQLITE_PRIVATE int sqlite3StmtVtabInit(sqlite3*);
 #endif
-#ifdef SQLITE_ENABLE_SQLEANALL
-SQLITE_PRIVATE int sqlite3TextInit(sqlite3*);
-SQLITE_PRIVATE int sqlite3_unicode_init_impl(sqlite3*);
-SQLITE_PRIVATE int sqlite3ReInit(sqlite3*);
-SQLITE_PRIVATE int sqlite3MathInit(sqlite3*);
-#endif 
 
 /*
 ** An array of pointers to extension initializer functions for
@@ -164143,12 +164137,6 @@ static int (*const sqlite3BuiltinExtensions[])(sqlite3*) = {
 #endif
 #ifdef SQLITE_ENABLE_BYTECODE_VTAB
   sqlite3VdbeBytecodeVtabInit,
-#endif
-#ifdef SQLITE_ENABLE_SQLEANALL
-  sqlite3TextInit,
-  sqlite3_unicode_init_impl,
-  sqlite3ReInit,
-  sqlite3MathInit,
 #endif
 };
 
