@@ -1,8 +1,8 @@
 #include <sqlite3ext.h>
 SQLITE_EXTENSION_INIT1
 
-#include "cJSON.h"
-#include <string.h>
+// Include necessary headers
+#include <stdint.h>
 
 // Helper function to compare JSON strings
 static void json_equal(sqlite3_context *context, int argc, sqlite3_value **argv) {

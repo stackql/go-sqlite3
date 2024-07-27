@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sqlite3ext.h>
+SQLITE_EXTENSION_INIT1
 
 /*
  * The "internal use only" fields in regexp.h are present to pass info from

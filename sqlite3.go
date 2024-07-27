@@ -1,9 +1,3 @@
-// Copyright (C) 2019 Yasuhiro Matsumoto <mattn.jp@gmail.com>.
-// Copyright (C) 2018 G.J.R. Timmer <gjr.timmer@gmail.com>.
-//
-// Use of this source code is governed by an MIT-style
-// license that can be found in the LICENSE file.
-
 //go:build cgo
 // +build cgo
 
@@ -32,8 +26,9 @@ package sqlite3
 #include <stdlib.h>
 #include <string.h>
 #include "ext/functions/json/cJSON.h"
-#include "ext/functions/json/cJSON.c"
 #include "ext/functions/included_functions.h"
+
+SQLITE_EXTENSION_INIT1
 
 #ifdef __CYGWIN__
 # include <errno.h>

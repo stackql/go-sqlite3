@@ -4,8 +4,8 @@
  */
 #include <assert.h>
 #include <math.h>
-
-#include "sqlite3ext.h"
+#include <stdint.h>
+#include <sqlite3ext.h>
 SQLITE_EXTENSION_INIT1
 
 #if defined(HAVE_STDINT_H) /* Use this case if we have ANSI headers */
