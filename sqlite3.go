@@ -22,6 +22,8 @@ package sqlite3
 #cgo CFLAGS: -DSQLITE_ENABLE_UPDATE_DELETE_LIMIT
 #cgo CFLAGS: -Wno-deprecated-declarations
 #cgo linux,!android CFLAGS: -DHAVE_PREAD64=1 -DHAVE_PWRITE64=1
+#cgo CFLAGS: -I${SRCDIR}/ext/functions/json
+#cgo LDFLAGS: -lm -ldl
 #ifndef USE_LIBSQLITE3
 #include <sqlite3-binding.h>
 #else
@@ -30,7 +32,9 @@ package sqlite3
 #include <stdlib.h>
 #include <string.h>
 
+#include "ext/functions/json/cJSON.h"
 #include "ext/functions/included_functions.h"
+*/
 
 #ifdef __CYGWIN__
 # include <errno.h>
