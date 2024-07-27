@@ -34,7 +34,6 @@ package sqlite3
 #include "ext/functions/json/cJSON.h"
 #include "ext/functions/json/cJSON.c"
 #include "ext/functions/included_functions.h"
-*/
 
 #ifdef __CYGWIN__
 # include <errno.h>
